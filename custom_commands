@@ -1,0 +1,29 @@
+# Text editor
+alias txx='~/dev/text-editor/build/txx'
+alias txx2='~/dev/text-editor-2/build/txx'
+alias ntxx='~/dev/ntxx/build/ntxx'
+
+alias vim='nvim'
+alias vi='nvim'
+alias nvim='nvim'
+
+# Custom commands
+alias explorer="explorer.exe ."
+alias emacs="emacs -nw"
+alias py='python3'
+
+# Copy command
+alias cclip="xclip -selection clipboard"
+
+function cmkdir ()
+{
+    if [ -n "$1" ]; then
+        mkdir "$1" && cd "$1"
+    else
+        echo "Usage: cmkdir <directory_name>"
+    fi
+}
+
+export NVM_DIR="/home/lucas/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+. "$HOME/.cargo/env"
