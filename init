@@ -1,1 +1,5 @@
-source ./custom_commands
+#!/bin/bash
+
+INIT_DIR="$(dirname "${BASH_SOURCE[0]}")"
+
+source "$INIT_DIR/custom_commands"

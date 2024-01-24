@@ -1,19 +1,42 @@
+#!/bin/bash
+
 # Text editor
 alias txx='~/dev/text-editor/build/txx'
 alias txx2='~/dev/text-editor-2/build/txx'
 alias ntxx='~/dev/ntxx/build/ntxx'
 
-alias vim='nvim'
 alias vi='nvim'
-alias nvim='nvim'
+alias vim='nvim'
 
-# Custom commands
 alias explorer="explorer.exe ."
-alias emacs="emacs -nw"
+
 alias py='python3'
 
-# Copy command
-alias cclip="xclip -selection clipboard"
+
+function cclip ()
+{
+    if [ -n "$1" -a -n "$2" -a ! -n "$3" ]; then
+        if [ "$2" != "-d" ]; then
+            echo "Invalid flag"
+            echo "Usage: cclip <file_name>"
+            echo "Flags: -d <discord_mode>"
+            return 0
+        fi
+
+        file_content=$(cat "$1")
+        prefix="${1##*.}"
+        modified_text=$'```'"$prefix"$'\n'"$file_content"$'```'
+        printf "%s" "$modified_text" | xclip -selection clipboard
+
+    elif [ -n "$1" -a ! -n "$3" ]; then
+        xclip "$1" -selection clipboard
+    else
+        echo "Usage: cclip <file_name>"
+        echo "Flags: -d <discord_mode>"
+    fi
+
+}
+
 
 function cmkdir ()
 {
@@ -24,6 +47,7 @@ function cmkdir ()
     fi
 }
 
+# nvm bullshit
 export NVM_DIR="/home/lucas/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 . "$HOME/.cargo/env"
